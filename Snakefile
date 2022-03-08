@@ -170,6 +170,7 @@ if config['enable'].get('build_cutout', False):
         threads: ATLITE_NPROCESSES
         resources: mem=ATLITE_NPROCESSES * 1000
         script: "scripts/build_cutout.py"
+        
 
 
 if config['enable'].get('build_natura_raster', False):

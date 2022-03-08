@@ -309,15 +309,17 @@ def mock_snakemake(rulename, **wildcards):
         if os.path.exists(p):
             snakefile = p
             break
-    workflow = sm.Workflow(snakefile)
+    workflow = sm.Workflow(snakefile, overwrite_configfiles=[])
     workflow.include(snakefile)
     workflow.global_resources = {}
     try:
         rule = workflow.get_rule(rulename)
     except Exception as exception:
-        print(exception, 
-        f"The {rulename} might be a conditional rule in the Snakefile.\n"
-        f"Did you enable {rulename} in the config?")
+        print(
+            exception,
+            f"The {rulename} might be a conditional rule in the Snakefile.\n"
+            f"Did you enable {rulename} in the config?",
+        )
         raise
     dag = sm.dag.DAG(workflow, rules=[rule])
     wc = Dict(wildcards)

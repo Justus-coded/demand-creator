@@ -101,13 +101,13 @@ from _helpers import configure_logging
 logger = logging.getLogger(__name__)
 
 # Requirement to set path to filepath for execution
-# os.chdir(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 if __name__ == "__main__":
     if "snakemake" not in globals():
         from _helpers import mock_snakemake
 
-        snakemake = mock_snakemake("build_cutout", cutout="africa-2013-era5")
+        snakemake = mock_snakemake("build_cutout", cutout="africa-2019-era5")
     configure_logging(snakemake)
 
     cutout_params = snakemake.config["atlite"]["cutouts"][
